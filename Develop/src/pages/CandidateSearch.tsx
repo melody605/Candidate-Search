@@ -15,9 +15,8 @@ const CandidateSearch = () => {
     company: string;
   });
   
-} catch (err) {
-  console.error('An error occurred while fetching candidate data:', err);
-}
+  const searchGithubCandidates = async () => {
+    try {
 
 useEffect(() => { (async () => { try { 
   const users = await searchGithub(); 
@@ -29,14 +28,10 @@ useEffect(() => { (async () => { try {
      []);
 
       useEffect(() => { 
-        localStorage.setItem('potentialCandidates', JSON.stringify(potentialCandidates)); }, [potentialCandidates]); 
-        
-        const handleCandidateAction = async (save: boolean) => { 
-          if (save && currentCandidate) setPotentialCandidates(prev => [...prev, currentCandidate]); 
-          const users = await searchGithub(); 
-          setCurrentCandidate(users.length ? await searchGithubUser(users[Math.floor(Math.random() * users.length)].username) : null); };
-
-
+        useEffect(() => {
+          searchGithubCandidates();
+        }, []);
+      
   return (
   <h1>CandidateSearch</h1>
   <div className="Candidate-card"> 
