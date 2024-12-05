@@ -5,16 +5,29 @@ import type Candidate from '../interfaces/Candidate.interface';
 const CandidateSearch = () => {
 
   const [setCurrentCandidate, currentCandidate, ] = useState<Candidate>({
-    name: '';
-    username: '';
-    location: '';
-    bio: '';
-    avatar_url: '';
-    email: '';
-    html_url: '';
-    company: '';
+    name: '',
+    username: '',
+    location: '',
+    bio: '',
+    avatar_url: '',
+    email: '',
+    html_url: '',
+    company: '',
   });
 
+  setCurrentCandidate({
+    name: userData.name || 'N/A',
+    username: userData.login || 'N/A',
+    location: userData.location || 'N/A',
+    bio: userData.bio || 'N/A',
+    avatar_url: userData.avatar_url || '',
+    email: userData.email || 'N/A',
+    html_url: userData.html_url || '',
+    company: userData.company || 'N/A',
+  });
+
+  const searchGithubCandidates = async () => {
+    try {
 
   //  adding to local storage
 
@@ -34,13 +47,16 @@ const CandidateSearch = () => {
  const fetchCandidate = async () => { 
   try { 
     const users = await searchGithub(); 
+
+
     if (users.length) { 
       const user = await searchGithubUser(users[Math.floor(Math.random() * users.length)].username); 
       
-      setCurrentCandidate(user); 
+      
+     setCurrentCandidate(user); 
     } else { 
       console.warn('No users found'); 
-      setCurrentCandidate(null); } 
+    setCurrentCandidate(null); } 
     } catch (err) { 
         console.error('An error occurred while fetching candidate data:', err);
 
