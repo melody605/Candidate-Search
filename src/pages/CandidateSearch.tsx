@@ -16,10 +16,13 @@ const CandidateSearch = () => {
     company: '',
   });
 
-  const setCandidateData = (userData: any) => {
+
+  // w3 schools helped me with the localStorage
+  
+  const setCandidateData = (userData: Partial<Candidate>) => {
     setCurrentCandidate({
       name: userData.name || 'N/A',
-      username: userData.login || 'N/A',
+      username: userData.username || 'N/A',
       location: userData.location || 'N/A',
       bio: userData.bio || 'N/A',
       avatar_url: userData.avatar_url || '',
