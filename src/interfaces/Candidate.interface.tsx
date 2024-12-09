@@ -10,5 +10,5 @@ export default interface Candidate {
         company: string;
       }
       
-    
+
     
